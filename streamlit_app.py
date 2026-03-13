@@ -17,8 +17,8 @@ pages = {
         st.Page("pages/3_intensity_bins.py", title="Intensity Bins", icon=":material/bar_chart:"),
         st.Page("pages/4_species_pca.py", title="Species PCA", icon=":material/biotech:"),
     ],
-    "Transformations": [
-        st.Page("pages/5_transforms.py", title="log2 vs VSN", icon=":material/transform:"),
+        "Transformations": [
+        st.Page("pages/5_transforms.py", title="log2 vs glog", icon=":material/transform:"),
     ],
     "Advanced": [
         st.Page("pages/6_variance_components.py", title="Variance Components", icon=":material/pie_chart:"),
