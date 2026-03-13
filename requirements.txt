@@ -6,7 +6,6 @@ scipy>=1.12
 # Data analysis
 scikit-learn>=1.4
 scikit-bio>=0.6.2
-pingouin>=0.5.4
 # Visualization
 plotly>=5.24
 streamlit-plotly-events>=0.0.6
