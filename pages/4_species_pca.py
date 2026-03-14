@@ -120,7 +120,7 @@ for i, species in enumerate(available_species):
                 color_map=CONDITION_COLORS,
             )
             fig.update_layout(width=400, height=400)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
             # PERMANOVA
             mat = df_sp.select(intensity_cols).to_numpy().T
