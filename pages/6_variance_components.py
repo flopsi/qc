@@ -84,7 +84,7 @@ try:
     
     # Bar chart
     fig = create_pvca_bar(pvca_result)
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
     
     # Detailed results
     st.subheader("Detailed Results")
@@ -145,7 +145,7 @@ try:
                         sp_pvca = run_pvca(df_sp, intensity_cols, conditions, threshold=threshold)
                         sp_fig = create_pvca_bar(sp_pvca, title=f"{species.capitalize()} PVCA")
                         sp_fig.update_layout(width=400, height=400)
-                        st.plotly_chart(sp_fig, use_container_width=True)
+                        st.plotly_chart(sp_fig, width='stretch')
                         
                         sp_cond = sp_pvca.components["Condition"] * 100
                         if species == "human":
