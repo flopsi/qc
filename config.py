@@ -1,37 +1,33 @@
-"""Proteomics QC Dashboard - Configuration."""
-from dataclasses import dataclass, field
+"""Global configuration: species map, thresholds, color palettes."""
 
+# Species color mapping
+SPECIES_COLORS = {
+    "human": "#4C78A8",   # Blue
+    "yeast": "#F58518",   # Orange
+    "ecoli": "#E45756",   # Red
+    "unknown": "#72B7B2", # Teal
+}
 
-@dataclass(frozen=True)
-class QCConfig:
-    """Central configuration for the QC dashboard."""
-    # Column naming conventions
-    intensity_prefix: str = "Intensity "
-    condition_col: str = "Condition"
-    replicate_col: str = "Replicate"
-    species_col: str = "Species"
-    protein_col: str = "Protein"
+# Condition color mapping
+CONDITION_COLORS = {
+    "A": "#4C78A8",  # Blue
+    "B": "#F58518",  # Orange
+}
 
-    # Intensity bin edges (log2 scale)
-    bin_edges: tuple = (0, 10, 15, 20, 25, 35)
-    bin_labels: tuple = ("<10", "10-15", "15-20", "20-25", ">25")
+# QC thresholds
+PERMANOVA_ALPHA = 0.05
+PERMANOVA_R2_GOOD = 0.3
+SILHOUETTE_GOOD = 0.5
+CV_THRESHOLD = 20.0  # %
+ICC_EXCELLENT = 0.9
+ICC_GOOD = 0.75
 
-    # PCA defaults
-    pca_n_components: int = 5
-    pca_scale: bool = True
+# Intensity bin labels
+BIN_LABELS = ["Q1", "Q2", "Q3", "Q4"]
 
-    # PERMANOVA defaults
-    permanova_permutations: int = 999
+# Default number of permutations
+DEFAULT_PERMUTATIONS = 999
 
-    # CV thresholds
-    cv_good: float = 0.10
-    cv_acceptable: float = 0.20
-
-    # Plotly color palette
-    color_discrete_sequence: tuple = (
-        "#636EFA", "#EF553B", "#00CC96", "#AB63FA",
-        "#FFA15A", "#19D3F3", "#FF6692", "#B6E880",
-    )
-
-
-CFG = QCConfig()
+# PCA defaults
+DEFAULT_N_COMPONENTS = 5
+DEFAULT_SCALE = True
