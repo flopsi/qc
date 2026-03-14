@@ -41,7 +41,7 @@ def load_protein_matrix(file_path: str | pl.DataFrame) -> pl.DataFrame:
         file_path,
         separator=sep,
         infer_schema_length=10000,
-        null_values=["", "NA", "NaN", "null", "NULL", "Filtered", "0", "NAN"],
+        null_values=["", "NA", "NaN", "null", "NULL", "Filtered",  "NAN"],
         try_parse_dates=False,
     )
 
