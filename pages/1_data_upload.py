@@ -219,7 +219,7 @@ if uploaded is not None:
 
     # === Preview ===
     st.subheader("Data Preview")
-    st.dataframe(df_std.head(50).to_pandas(), width='stretch)
+    st.dataframe(df_std.head(50).to_pandas(), width="stretch")
 
     # === Data quality summary ===
     with st.expander("\U0001f4ca Data Quality Summary"):
