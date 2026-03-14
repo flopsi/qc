@@ -1,8 +1,6 @@
 """Mean-SD diagnostic plot for assessing variance stabilization."""
 import numpy as np
 import plotly.graph_objects as go
-from scipy.ndimage import uniform_filter1d
-
 
 def create_mean_sd_plot(
     intensity_matrix: np.ndarray,
