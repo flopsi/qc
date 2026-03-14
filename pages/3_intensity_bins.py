@@ -98,7 +98,7 @@ for i, (tab, bin_name) in enumerate(zip(tabs, bin_names)):
                 title=f"PCA \u2014 {bin_name} ({n_proteins:,} proteins)",
                 color_map=CONDITION_COLORS,
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
             
             # PERMANOVA
             mat = df_bin.select(intensity_cols).to_numpy().T
@@ -151,7 +151,7 @@ for i, (tab, bin_name) in enumerate(zip(tabs, bin_names)):
 # Summary table
 st.subheader("Summary Across Intensity Bins")
 if summary_rows:
-    st.dataframe(pl.DataFrame(summary_rows).to_pandas(), use_container_width=True)
+    st.dataframe(pl.DataFrame(summary_rows).to_pandas(), width='stretch')
     
     # Overall trend assessment
     valid_r2 = [float(r["R\u00b2"]) for r in summary_rows 
