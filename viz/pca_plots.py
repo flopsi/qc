@@ -53,7 +53,7 @@ def create_pca_scatter(
     fig.update_traces(marker=dict(size=14, line=dict(width=2, color="white")))
     
     # Add 95% confidence ellipses
-    for cond in set(conditions):
+        for cond in dict.fromkeys(conditions):
         mask = [c == cond for c in conditions]
         x_vals = pca_result.scores[mask, pc_x - 1]
         y_vals = pca_result.scores[mask, pc_y - 1]
@@ -72,9 +72,7 @@ def create_pca_scatter(
 
 def _add_confidence_ellipse(fig, x, y, name, color_map=None):
     """Add 95% confidence ellipse to figure."""
-    from matplotlib.patches import Ellipse
-    import matplotlib.transforms as transforms
-    
+
     mean_x = np.mean(x)
     mean_y = np.mean(y)
     
@@ -84,6 +82,7 @@ def _add_confidence_ellipse(fig, x, y, name, color_map=None):
     # Sort eigenvalues/vectors
     order = eigenvalues.argsort()[::-1]
     eigenvalues = eigenvalues[order]
+    eigenvalues = np.maximum(eigenvalues, 0)  # Guard against negative from numerical noise
     eigenvectors = eigenvectors[:, order]
     
     # 95% confidence interval chi-squared value for 2 DOF
