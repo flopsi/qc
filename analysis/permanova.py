@@ -48,54 +48,31 @@ def run_permanova(
     grouping: list[str],
     metric: str = "euclidean",
     permutations: int = 999,
-    seed: int = 42,
+    seed: int | None = 42,
 ) -> PermanovaResult:
-    """Run PERMANOVA on intensity matrix.
-    
-    Args:
-        intensity_matrix: (n_samples, n_features) array
-        grouping: Group labels for each sample
-        metric: Distance metric (euclidean for log-transformed data)
-        permutations: Number of permutations for p-value
-        seed: Random seed for reproducibility
-    
-    Returns:
-        PermanovaResult with F-statistic, p-value, R², and small-sample metadata
-    
-    Note:
-        With small balanced designs (e.g. 3 vs 3), the minimum achievable 
-        p-value is 0.10 due to the limited number of unique permutations.
-        In such cases, interpret R² and silhouette score alongside p-value.
-    """
-    # Compute distance matrix
+    n = len(grouping)
+    if intensity_matrix.shape[0] != n:
+        raise ValueError("intensity_matrix rows must match len(grouping)")
+
     dist_condensed = pdist(intensity_matrix, metric=metric)
     dist_square = squareform(dist_condensed)
-    dm = DistanceMatrix(dist_square, ids=[str(i) for i in range(len(grouping))])
-    
-    # Run PERMANOVA
-    result = permanova(dm, grouping, permutations=permutations)
-    
-    # Extract R² = SS_between / SS_total
-    f_stat = result["test statistic"]
-    n = len(grouping)
-    k = len(set(grouping))
-    r_squared = (f_stat * (k - 1)) / (f_stat * (k - 1) + (n - k))
-    
-    # Compute minimum achievable p-value for this design
-    min_p = _compute_min_p(n, k)
-    p_val = result["p-value"]
-    
+    dm = DistanceMatrix(dist_square, ids=[str(i) for i in range(n)])
+
+    result = permanova(dm, grouping, permutations=permutations, seed=seed)
+
+    f_stat = float(result["test statistic"])
+    p_value = float(result["p-value"])
+    n_groups = len(set(grouping))
+    r_squared = 1.0 / (1.0 + ((n - n_groups) / ((n_groups - 1) * f_stat)))
+
     return PermanovaResult(
         test_statistic=f_stat,
-        p_value=p_val,
+        p_value=p_value,
         r_squared=r_squared,
         n_permutations=permutations,
         sample_size=n,
-        n_groups=k,
-        min_achievable_p=min_p,
-        is_min_p=abs(p_val - min_p) < 0.02,  # Close to the theoretical minimum
+        n_groups=n_groups,
     )
-
 
 def interpret_permanova(result: PermanovaResult, context: str = "global") -> tuple[str, str]:
     """Generate human-readable interpretation of PERMANOVA results.
