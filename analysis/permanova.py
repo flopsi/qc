@@ -8,15 +8,13 @@ from skbio.stats.distance import permanova, DistanceMatrix
 
 @dataclass
 class PermanovaResult:
-    """Container for PERMANOVA results."""
-    test_statistic: float  # pseudo-F
+    test_statistic: float
     p_value: float
-    r_squared: float       # Effect size
+    r_squared: float
     n_permutations: int
     sample_size: int
     n_groups: int
-    min_achievable_p: float  # Minimum p-value possible given sample size
-    is_min_p: bool           # Whether observed p equals the minimum achievable
+
 
 
 def _compute_min_p(n: int, k: int) -> float:
