@@ -6,7 +6,7 @@ scipy>=1.12
 
 # Data analysis
 scikit-learn>=1.4
-scikit-bio>=0.6.2
+scikit-bio>=0.6.3
 pingouin>=0.5.4
 
 # Visualization
