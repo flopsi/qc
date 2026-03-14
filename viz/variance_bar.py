@@ -33,7 +33,7 @@ def create_pvca_bar(
     for i, (name, val) in enumerate(components.items()):
         fig.add_annotation(
             x=name,
-            y=val * 100 + 2,
+                        y=min(val * 100 + 2, 98),
             text=f"{val*100:.1f}%",
             showarrow=False,
             font=dict(size=14, color="black"),
