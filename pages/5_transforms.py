@@ -74,7 +74,7 @@ with cols[0]:
     if len(raw_valid) > 0:
         fig_raw = create_mean_sd_plot(raw_valid, title="Raw")
         fig_raw.update_layout(width=400, height=400)
-        st.plotly_chart(fig_raw, use_container_width=True)
+        st.plotly_chart(fig_raw, width='stretch')
         
         row_sds = np.std(raw_valid, axis=1, ddof=1)
         st.write(f"Median SD: **{np.median(row_sds):.1f}**")
@@ -95,7 +95,7 @@ for i, (name, df_t) in enumerate(transforms.items()):
         if len(mat_valid) > 0:
             fig = create_mean_sd_plot(mat_valid, title=name)
             fig.update_layout(width=400, height=400)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
             
             row_sds = np.std(mat_valid, axis=1, ddof=1)
             st.write(f"Median SD: **{np.median(row_sds):.3f}**")
