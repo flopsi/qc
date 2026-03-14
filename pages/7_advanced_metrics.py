@@ -130,7 +130,7 @@ cv_df = compute_cvs(df_raw_binned, intensity_cols, conditions)
 st.markdown("**Global CV Summary:**")
 cv_summary = create_cv_summary_table(cv_df, conditions)
 if cv_summary.shape[0] > 0:
-    st.dataframe(cv_summary.to_pandas(), use_container_width=True)
+    st.dataframe(cv_summary.to_pandas(), width='stretch')
 
     # Interpretation
     for row in cv_summary.iter_rows(named=True):
@@ -152,7 +152,7 @@ if cv_summary.shape[0] > 0:
 st.markdown("**CV Distribution by Intensity Bin:**")
 fig_cv_bin = create_cv_violin_plot(cv_df, conditions, group_by="intensity_bin",
                                     title="CV (%) by Intensity Bin (raw intensities)")
-st.plotly_chart(fig_cv_bin, use_container_width=True)
+st.plotly_chart(fig_cv_bin, width='stretch')
 
 # Per-bin interpretation
 if "intensity_bin" in cv_df.columns:
@@ -214,7 +214,7 @@ if "species" in cv_df.columns:
     st.markdown("**CV Distribution by Species:**")
     fig_cv_sp = create_cv_violin_plot(cv_df, conditions, group_by="species",
                                       title="CV (%) by Species (raw intensities)")
-    st.plotly_chart(fig_cv_sp, use_container_width=True)
+    st.plotly_chart(fig_cv_sp, width='stretch')
 
 # === Cluster Metrics Section ===
 st.subheader("Cluster Quality Metrics")
@@ -234,7 +234,7 @@ try:
             "Calinski-Harabasz": f"{cluster.calinski_harabasz:.1f}",
         })
 
-    st.dataframe(pl.DataFrame(metric_rows).to_pandas(), use_container_width=True)
+    st.dataframe(pl.DataFrame(metric_rows).to_pandas(), width='stretch')
 
     # Interpretation
     sil_values = [float(r["Silhouette"]) for r in metric_rows]
