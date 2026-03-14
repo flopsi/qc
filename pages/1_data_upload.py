@@ -219,7 +219,7 @@ if uploaded is not None:
 
     # === Preview ===
     st.subheader("Data Preview")
-    st.dataframe(df_std.head(50).to_pandas(), use_container_width=True)
+    st.dataframe(df_std.head(50).to_pandas(), width='stretch)
 
     # === Data quality summary ===
     with st.expander("\U0001f4ca Data Quality Summary"):
@@ -254,6 +254,6 @@ if uploaded is not None:
             )
 
         st.write("**Sample Metadata:**")
-        st.dataframe(metadata.to_pandas(), use_container_width=True)
+        st.dataframe(metadata.to_pandas(), width="stretch")
 else:
     st.info("\U0001f449 Upload a TSV or CSV protein or peptide matrix to get started.")
