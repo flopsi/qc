@@ -126,11 +126,11 @@ fig_pca = create_pca_scatter(
     title=f"Global PCA \u2014 {transform} transformed{scale_label}",
     color_map=CONDITION_COLORS,
 )
-st.plotly_chart(fig_pca, use_container_width=True)
+st.plotly_chart(fig_pca, width='stretch')
 
 # Scree plot
 fig_var = create_scree_plot(pca_result)
-st.plotly_chart(fig_var, use_container_width=True)
+st.plotly_chart(fig_var, width='stretch')
 
 # PERMANOVA
 st.subheader("PERMANOVA Results")
@@ -175,4 +175,4 @@ else:
 # Correlation heatmap
 st.subheader("Sample Correlation")
 fig_corr = create_correlation_heatmap(df_t, intensity_cols)
-st.plotly_chart(fig_corr, use_container_width=True)
+st.plotly_chart(fig_corr, width='stretch')
