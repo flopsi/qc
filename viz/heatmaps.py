@@ -17,7 +17,7 @@ def create_correlation_heatmap(
     valid = ~np.isnan(mat).any(axis=0)
     mat_clean = mat[:, valid]
 
-        if mat_clean.shape[1] == 0:
+    if mat_clean.shape[1] == 0:
         fig = go.Figure()
         fig.add_annotation(text="No valid proteins for correlation", showarrow=False)
         return fig
