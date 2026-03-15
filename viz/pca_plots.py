@@ -53,7 +53,7 @@ def create_pca_scatter(
     fig.update_traces(marker=dict(size=14, line=dict(width=2, color="white")))
     
     # Add 95% confidence ellipses
-        for cond in dict.fromkeys(conditions):
+    for cond in dict.fromkeys(conditions):
         mask = [c == cond for c in conditions]
         x_vals = pca_result.scores[mask, pc_x - 1]
         y_vals = pca_result.scores[mask, pc_y - 1]
